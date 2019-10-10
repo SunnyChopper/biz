@@ -18,4 +18,8 @@ class Kit extends Model
     	return $query->where('is_active', 0);
     }
 
+    public function downloadables() {
+    	return $this->hasMany('App\Downloadable', 'id', 'kit_id');
+    }
+
 }

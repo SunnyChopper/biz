@@ -21,13 +21,19 @@
 
 				<span class="d-inline-block d-lg-block"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span class="icon-menu h3 text-white"></span></a></span>
 				<nav class="site-navigation text-right ml-auto d-none d-lg-none" role="navigation">
+					@if(Auth::guest())
 					<ul class="site-menu main-menu js-clone-nav ml-auto ">
-						<li class="active"><a href="index.html" class="nav-link">Home</a></li>
-						<li><a href="about.html" class="nav-link">About</a></li>
-						<li><a href="work.html" class="nav-link">Work</a></li>
-						<li><a href="journal.html" class="nav-link">Journal</a></li>
-						<li><a href="contact.html" class="nav-link">Contact</a></li>
+						<li <?php if (request()->path() == '/') { echo 'class="active"'; } ?>><a href="/" class="nav-link">Home</a></li>
+						<li <?php if (request()->path() == 'beta/login') { echo 'class="active"'; } ?>><a href="/beta/login" class="nav-link">Login</a></li>
+						<li <?php if (request()->path() == 'beta') { echo 'class="active"'; } ?>><a href="/beta" class="nav-link">Register</a></li>
 					</ul>
+					@else
+					<ul class="site-menu main-menu js-clone-nav ml-auto ">
+						<li <?php if (request()->path() == 'beta/dashboard') { echo 'class="active"'; } ?>><a href="/beta/dashboard" class="nav-link">Dashboard</a></li>
+						<li <?php if (request()->path() == 'beta/kits') { echo 'class="active"'; } ?>><a href="/beta/kits" class="nav-link">Starter Kits</a></li>
+						<li <?php if (request()->path() == 'beta/logout') { echo 'class="active"'; } ?>><a href="/beta/logout" class="nav-link">Logout</a></li>
+					</ul>
+					@endif
 				</nav>
 			</div>
 		</div>

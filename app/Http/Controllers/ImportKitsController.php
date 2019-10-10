@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+
 use App\ImportKit;
 
 use Illuminate\Http\Request;

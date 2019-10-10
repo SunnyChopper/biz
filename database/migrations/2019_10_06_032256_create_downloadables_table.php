@@ -15,6 +15,7 @@ class CreateDownloadablesTable extends Migration
     {
         Schema::create('downloadables', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('kit_id');
             $table->string('title', 128);
             $table->text('description');
             $table->integer('category');

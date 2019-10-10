@@ -2,12 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Redirect;
+
+use App\DownloadLog;
 use App\Downloadable;
 
 use Illuminate\Http\Request;
 
 class DownloadablesController extends Controller
 {
+
+	/* ---------------------- *\
+		Helper Functions
+	\* ---------------------- */
+
+	public function download($download_id) {
+		$d = Downloadable::find($download_id);
+
+		$log = new DownloadLog;
+		$log->download_id = $download_id;
+		$log->user_id = Auth::id();
+		$log->save();
+
+		return redirect()->away($d->filepath);
+	}
     
 	/* ---------------------- *\
 		CRUD Functions
