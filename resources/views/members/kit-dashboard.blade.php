@@ -53,9 +53,13 @@
 								<td style='vertical-align: middle;'>Other</td>
 								@endif
 
+								@if($d->status == 1)
 								<td style='vertical-align: middle;'>
 									<a href='{{ url('/beta/download/' . $d->id) }}' target='_blank' class='btn btn-sm btn-secondary'>Download</a>
 								</td>
+								@else
+								<td style='vertical-align: middle;'>Link Coming Soon</td>
+								@endif
 							</tr>
 							@endforeach
 						</tbody>
