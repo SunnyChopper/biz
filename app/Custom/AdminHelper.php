@@ -2,6 +2,8 @@
 
 namespace App\Custom;
 
+use Auth;
+
 use Illuminate\Support\Facades\Session;
 
 use App\User;
