@@ -27,3 +27,9 @@ Route::get('/beta/kit/{kit_id}/pages', 'ViewsController@beta_pages');
 Route::get('/beta/kit/{kit_id}/dashboard', 'ViewsController@beta_kit_dashboard');
 Route::get('/beta/download/{download_id}', 'DownloadablesController@download');
 Route::get('/beta/logout', 'ViewsController@beta_logout');
+
+// Admin pages
+Route::get('/admin', 'AdminController@index');
+Route::post('/admin/login', 'AdminController@attempt_login');
+Route::get('/admin/dashboard', 'AdminController@dashboard');
+Route::get('/admin/kit/{kit_id}/edit', 'AdminController@edit_kit');

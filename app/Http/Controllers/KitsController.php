@@ -10,6 +10,14 @@ class KitsController extends Controller
 {
     
 	/* ---------------------- *\
+		Get Functions
+	\* ---------------------- */
+
+	public function get_kits() {
+		return response()->json(Kit::active()->get()->toArray(), 200);
+	}
+
+	/* ---------------------- *\
 		CRUD Functions
 	\* ---------------------- */
 

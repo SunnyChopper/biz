@@ -45,3 +45,6 @@ Route::get('/users/kits/imported', function() {
 });
 
 Route::post('/imports/create', 'ImportKitsController@create');
+
+Route::get('/kits', 'KitsController@get_kits');
+Route::get('/kits/{kit_id}/pages', 'PagesController@get_pages');

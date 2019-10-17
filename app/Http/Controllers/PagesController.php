@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+
+	/* ---------------------- *\
+		Get Functions
+	\* ---------------------- */
+
+	public function get_pages($kit_id) {
+		return response()->json(Page::where('kit_id', $kit_id)->active()->get()->toArray(), 200);
+	}
     
 	/* ---------------------- *\
 		CRUD Functions
