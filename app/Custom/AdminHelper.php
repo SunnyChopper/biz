@@ -9,9 +9,13 @@ use App\User;
 class AdminHelper {
 	
 	public static function isLoggedIn() {
-		if (Session::get('admin_id') != -1) {
-			return true;
-		} else {
+		if (Session::has('admin_id')) {
+			if (Session::get('admin_id') != -1) {
+				return true;
+			} else {
+				return false;
+			}
+		} else{
 			return false;
 		}
 	}
