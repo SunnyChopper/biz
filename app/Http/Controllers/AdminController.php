@@ -6,7 +6,7 @@ use Auth;
 
 use App\Custom\AdminHelper;
 use Illuminate\Http\Request;
-use Illuminate\Facades\Support\Hash;
+use Illuminate\Support\Facades\Hash;
 
 use App\User;
 use App\Kit;
