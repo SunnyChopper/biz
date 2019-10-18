@@ -26,6 +26,16 @@
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('css/layouts.css') }}">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131372255-6"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-131372255-6');
+	</script>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<div class="site-wrap" id="home-section">
