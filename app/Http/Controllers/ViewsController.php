@@ -117,7 +117,7 @@ class ViewsController extends Controller
 		}
 
 		$kit = Kit::find($kit_id);
-		$pages = Page::where('kit_id', $kit_id)->active()->orderBy('section', 'DESC')->get();
+		$pages = Page::where('kit_id', $kit_id)->active()->orderBy('order', DESC)->get();
 		$page_title = $kit->title;
 		return view('members.pages')->with('page_title', $page_title)->with('kit', $kit)->with('pages', $pages);
 	}

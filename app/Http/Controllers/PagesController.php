@@ -14,7 +14,7 @@ class PagesController extends Controller
 	\* ---------------------- */
 
 	public function get_pages($kit_id) {
-		return response()->json(Page::where('kit_id', $kit_id)->active()->get()->toArray(), 200);
+		return response()->json(Page::where('kit_id', $kit_id)->active()->orderBy('section', DESC)->get()->toArray(), 200);
 	}
     
 	/* ---------------------- *\
