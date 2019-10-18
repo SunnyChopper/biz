@@ -59,7 +59,7 @@
 					<h5 id='sidebar_title' class='mb-3'></h5>
 					<p id='sidebar_description' class='mb-3'></p>
 					<button id='import_button' type='button' class='btn btn-primary full-width import' style="display: none;">Import to Library</button>
-					<a id='access_button' href="{{ url('/beta/kit/' . $kit->id . '/pages') }}" class="btn btn-primary full-width" style="display: none;">Access Kit Pages</a>
+					<a id='access_button' href="{{ url('/beta/kit/' . $kit->id . '/dashboard') }}" class="btn btn-primary full-width" style="display: none;">Access Kit Dashboard</a>
 				</div>
 			</div>
 		</div>
