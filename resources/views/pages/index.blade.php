@@ -107,6 +107,8 @@
     						</div>
   						</div>
 					</div>
+
+					<a href="{{ url('/beta') }}" class="btn btn-primary centered mt-32">Access Beta Program</a>
 				</div>
 			</div>
 		</div>
