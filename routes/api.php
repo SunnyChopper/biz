@@ -51,3 +51,5 @@ Route::get('/kits/{kit_id}/pages', 'PagesController@get_pages');
 
 Route::post('/pages/create', 'PagesController@create');
 Route::post('/pages/edit', 'PagesController@update');
+
+Route::post('/email/submit', 'EmailsController@submit');

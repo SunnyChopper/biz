@@ -73,17 +73,19 @@
 					<h5 class='text-center'>Don't Have an Invite Code?</h5>
 					<p class='text-center'>Enter in your email below and we'll send you an invite code. Limited spots available for quality purposes.</p>
 
-					<form>
-					<div class='form-group row'>
-						<div class='col-12'>
-							<label class='mb-0'>Email:</label>
-							<input type='email' class='form-control' style='padding: 8px; height: 40px;'>
-						</div>
-					</div>
 
 					<div class='form-group row'>
 						<div class='col-12'>
-							<input type='submit' class='btn btn-success centered' value='Get Invite Code'>
+							<label class='mb-0'>Email:</label>
+							<input type='email' id="invite_email" class='form-control' style='padding: 8px; height: 40px;'>
+						</div>
+					</div>
+
+					<p id='submit_feedback' class='text-center' style='display: none;'></p>
+
+					<div class='form-group row'>
+						<div class='col-12'>
+							<button type='button' class='btn btn-success centered submit_email'>Get Invite Code</button>
 						</div>
 					</div>
 				</div>
@@ -94,6 +96,38 @@
 
 @section('page_js')
 	<script type='text/javascript'>
+		var _token = '{{ csrf_token() }}';
+
+		$('.submit_email').on('click', function() {
+			$.ajax({
+				url : '/api/email/submit',
+				type : 'POST',
+				data : {
+					'_token' : _token,
+					'email' : $('#invite_email').val()
+				},
+				success : function(data) {
+					if (data == true) {
+						$('#submit_feedback').removeClass('red');
+						$('#submit_feedback').addClass('green');
+						$('#submit_feedback').html('Email successfully submitted.');
+						$('#submit_feedback').show();
+
+						$('#invite_email').val('');
+						$('#invite_email').css('border', '1px solid green');
+					} else {
+						$('#submit_feedback').removeClass('green');
+						$('#submit_feedback').addClass('red');
+						$('#submit_feedback').html('Email has already been submitted.');
+						$('#submit_feedback').show();
+
+						$('#invite_email').val('');
+						$('#invite_email').css('border', '1px solid red');
+					}
+				}
+			});
+		});
+
 		$('#register_email').on('change', function() {
 			$.ajax({
 				url : '/api/users/email/check',
