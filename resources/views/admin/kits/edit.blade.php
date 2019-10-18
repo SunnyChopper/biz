@@ -238,6 +238,10 @@
 			html +=	`</tbody>
 					</table>
 				</div>
+
+				<div class='mt-16'>
+					<button type='button' class='btn btn-primary centered create_page_button'>Create New Page</button>
+				</div>
 			`;
 
 			$('#pages_container').html(html); 
