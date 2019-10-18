@@ -74,6 +74,12 @@ class KitsController extends Controller
 		$kit->description = $data->description;
 		$kit->save();
 
+		if (isset($data->from)) {
+			if ($data->from == "web") {
+				return redirect(url('/admin/kits'));
+			}
+		}
+
 		return response()->json(true, 200);
 	}
 

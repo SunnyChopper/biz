@@ -38,3 +38,4 @@ Route::get('/admin/kits', 'KitsController@admin_view');
 Route::get('/admin/kits/new', 'KitsController@admin_new');
 Route::get('/admin/kits/{kit_id}/edit', 'AdminController@edit_kit');
 Route::post('/admin/kits/create', 'KitsController@create');
+Route::post('/admin/kits/update', 'KitsController@update');

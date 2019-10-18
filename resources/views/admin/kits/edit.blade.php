@@ -11,8 +11,10 @@
 				<h5>Edit Basic Information</h5>
 				<hr />
 
-				<form action='{{ url('/admin/kit/' . $kit->id . '/edit') }}' method='POST'>
+				<form action='{{ url('/admin/kits/update') }}' method='POST'>
 					{{ csrf_field() }}
+					<input type="hidden" name="kit_id" value="{{ $kit->id }}">
+					<input type="hidden" name="from" value="web">
 					<div class='form-group row'>
 						<div class='col-12'>
 							<label>Cover Image URL:</label>
