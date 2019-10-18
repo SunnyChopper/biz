@@ -11,7 +11,7 @@
 				<h5>Edit Basic Information</h5>
 				<hr />
 
-				<form action='{{ url('/admin/kits/update') }}' method='POST'>
+				<form id='update_kit_form' action='{{ url('/admin/kits/update') }}' method='POST'>
 					{{ csrf_field() }}
 					<input type="hidden" name="kit_id" value="{{ $kit->id }}">
 					<input type="hidden" name="from" value="web">
@@ -32,7 +32,7 @@
 					<div class='form-group row'>
 						<div class='col-12'>
 							<label>Description:</label>
-							<textarea id='description' class='form-control' rows='8'>{{ $kit->description }}</textarea>
+							<textarea form='update_kit_form' name="description" id='description' class='form-control' rows='8'>{{ $kit->description }}</textarea>
 						</div>
 					</div>
 
