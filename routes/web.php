@@ -32,6 +32,7 @@ Route::get('/beta/logout', 'ViewsController@beta_logout');
 Route::get('/admin', 'AdminController@index');
 Route::post('/admin/login', 'AdminController@attempt_login');
 Route::get('/admin/dashboard', 'AdminController@dashboard');
+Route::get('/admin/logout', 'AdminController@logout');
 
 // Admin kit pages
 Route::get('/admin/kits', 'KitsController@admin_view');

@@ -45,6 +45,12 @@ class AdminController extends Controller
 		}
 	}
 
+	public function logout() {
+		AdminHelper::logout();
+		Auth::logout();
+		return redirect(url('/'));
+	}
+
 	public function dashboard() {
 		if (AdminHelper::isLoggedIn() == false) {
 			return redirect(url('/admin'));
