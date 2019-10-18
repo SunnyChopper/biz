@@ -27,6 +27,11 @@ class AdminHelper {
 		Session::save();
 	}
 
+	public static function logout() {
+		Session::forget('admin_id');
+		Session::save();
+	}
+
 	public static function isAdmin($user_id) {
 		if (User::find($user_id)->backend_auth == 0) {
 			return false;

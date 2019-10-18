@@ -32,4 +32,9 @@ Route::get('/beta/logout', 'ViewsController@beta_logout');
 Route::get('/admin', 'AdminController@index');
 Route::post('/admin/login', 'AdminController@attempt_login');
 Route::get('/admin/dashboard', 'AdminController@dashboard');
-Route::get('/admin/kit/{kit_id}/edit', 'AdminController@edit_kit');
+
+// Admin kit pages
+Route::get('/admin/kits', 'KitsController@admin_view');
+Route::get('/admin/kits/new', 'KitsController@admin_new');
+Route::get('/admin/kits/{kit_id}/edit', 'AdminController@edit_kit');
+Route::post('/admin/kits/create', 'KitsController@create');

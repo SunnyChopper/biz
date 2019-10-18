@@ -27,11 +27,17 @@
 						<li <?php if (request()->path() == 'beta/login') { echo 'class="active"'; } ?>><a href="/beta/login" class="nav-link">Login</a></li>
 						<li <?php if (request()->path() == 'beta') { echo 'class="active"'; } ?>><a href="/beta" class="nav-link">Register</a></li>
 					</ul>
-					@else
+					@elseif(!Auth::guest() && \App\Custom\AdminHelper::isLoggedIn() == false)
 					<ul class="site-menu main-menu js-clone-nav ml-auto ">
 						<li <?php if (request()->path() == 'beta/dashboard') { echo 'class="active"'; } ?>><a href="/beta/dashboard" class="nav-link">Dashboard</a></li>
 						<li <?php if (request()->path() == 'beta/kits') { echo 'class="active"'; } ?>><a href="/beta/kits" class="nav-link">Starter Kits</a></li>
 						<li <?php if (request()->path() == 'beta/logout') { echo 'class="active"'; } ?>><a href="/beta/logout" class="nav-link">Logout</a></li>
+					</ul>
+					@elseif(!Auth::guest() && \App\Custom\AdminHelper::isLoggedIn() == true)
+					<ul class="site-menu main-menu js-clone-nav ml-auto ">
+						<li <?php if (request()->path() == 'admin/dashboard') { echo 'class="active"'; } ?>><a href="/admin/dashboard" class="nav-link">Dashboard</a></li>
+						<li <?php if (request()->path() == 'admin/kits') { echo 'class="active"'; } ?>><a href="/admin/kits" class="nav-link">Starter Kits</a></li>
+						<li <?php if (request()->path() == 'admin/logout') { echo 'class="active"'; } ?>><a href="/admin/logout" class="nav-link">Logout</a></li>
 					</ul>
 					@endif
 				</nav>

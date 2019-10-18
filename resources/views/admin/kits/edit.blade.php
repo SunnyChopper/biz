@@ -2,6 +2,8 @@
 
 @section('content')
 	@include('layouts.banner')
+	@include('admin.pages.modals.create')
+	@include('admin.pages.modals.edit')
 
 	<div class='container pt-64 pb-64'>
 		<div class='row justify-content-center'>
@@ -61,12 +63,139 @@
 		var pages = Array();
 
 		/* ----------------- *\
+			Buttons
+		\* ----------------- */
+
+		$(document.body).on('click', '.create_page_button', function() {
+			$('#new_page_modal').modal();
+		});
+
+		$(document.body).on('click', '.edit_page_button', function() {
+			var index = $(this).data('index');
+			var page = pages[index];
+			$('#edit_page_id').val(page["id"]);
+			$('#edit_section').val(page["section"]);
+			$('#edit_order').val(page["order"]);
+			$('#edit_title').val(page["title"]);
+			tinymce.get('edit_description').setContent(page["body"]);
+			$('#edit_page_modal').modal();
+		});
+
+		$(".update").on('click', function() {
+			if (validateEditInput() == true) {
+				var section = $('#edit_section').val();
+				var order = $('#edit_order').val();
+				var title = $('#edit_title').val();
+				var description = tinymce.get('edit_description').getContent();
+
+				$.ajax({
+					url : '/api/pages/edit',
+					type : 'POST',
+					data : {
+						'_token' : _token,
+						'page_id' : $('#edit_page_id').val(),
+						'section' : section,
+						'order' : order,
+						'title' : title,
+						'body' : description
+					},
+					success : function(data) {
+						if (data == true) {
+							fetchPages();
+							$('#edit_page_modal').modal('hide');
+						}
+					}
+				});
+			} else {
+				$('#edit_error').show();
+				$('#edit_error_message').html('Please fill out all required fields.');
+			}
+		});
+
+		$(".create").on('click', function() {
+			if (validateCreateInput() == true) {
+				var section = $('#create_section').val();
+				var order = $('#create_order').val();
+				var title = $('#create_title').val();
+				var description = tinymce.get('create_description').getContent();
+
+				$('#error').hide();
+				
+				$.ajax({
+					url : '/api/pages/create',
+					type : 'POST',
+					data : {
+						'_token' : _token,
+						'kit_id' : $('#create_kit_id').val(),
+						'section' : section,
+						'order' : order,
+						'title' : title,
+						'body' : description
+					},
+					success : function(data) {
+						if (data == true) {
+							clearInput();
+							fetchPages();
+							$('#new_page_modal').modal('hide');
+						}
+					}
+				});
+			} else {
+				$('#error').show();
+				$('#error_message').html('Please fill out all fields.');
+			}
+		});
+
+		/* ----------------- *\
 			Helper Functions
 		\* ----------------- */
+
+		function validateCreateInput() {
+			var section = $('#create_section').val();
+			var order = $('#create_order').val();
+			var title = $('#create_title').val();
+			var description = tinymce.get('create_description').getContent();
+
+			if (section != "" && order != "" && title != "" && description != "") {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		function validateEditInput() {
+			var section = $('#edit_section').val();
+			var order = $('#edit_order').val();
+			var title = $('#edit_title').val();
+			var description = tinymce.get('edit_description').getContent();
+
+			if (section != "" && order != "" && title != "" && description != "") {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		function clearInput() {
+			$('#create_section').val('');
+			$('#create_order').val('');
+			$('#create_title').val('');
+			$('#create_description').val('');
+		}
 
 		function setupEditor() {
 			tinymce.init({
 				selector: '#description',
+				plugins: "code"
+			});
+
+			tinymce.init({
+				selector: '#edit_description',
+				plugins: "code"
+			});
+
+			tinymce.init({
+				selector: '#create_description',
 				plugins: "code"
 			});
 		}
@@ -86,6 +215,7 @@
 						</thead>
 						<tbody>`;
 
+			var index = 0;
 			pages.forEach(function(page) {
 				html += `
 					<tr>
@@ -94,11 +224,13 @@
 						<td style='vertical-align: middle;'>` + page["title"] + `</td>
 						<td style='vertical-align: middle;'>` + page["views"] + `</td>
 						<td style='vertical-align: middle;'>
-							<button type='button' data-id='` + page["id"] + `' class='btn btn-sm btn-primary m-2 edit_page_button' style='float: right;'>Edit Page</button>
+							<button type='button' data-index='` + index + `' data-id='` + page["id"] + `' class='btn btn-sm btn-primary m-2 edit_page_button' style='float: right;'>Edit Page</button>
 							<button type='button' data-id='` + page["id"] + `' class='btn btn-sm btn-danger m-2 delete_page_button' style='float: right;'>Delete Page</button>
 						</td>
 					</tr>
 				`;
+
+				index++;
 			});
 
 			html +=	`</tbody>
