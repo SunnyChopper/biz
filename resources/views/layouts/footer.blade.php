@@ -14,10 +14,14 @@
 							<li><a href="{{ url('/') }}">Home</a></li>
 							<li><a href="{{ url('/beta') }}">Register</a></li>
 							<li><a href="{{ url('/login') }}">Login</a></li>
-							@else
+							@elseif(!Auth::guest() && \App\Custom\AdminHelper::isLoggedIn() == false)
 							<li><a href="{{ url('/beta/dashboard') }}">Dashboard</a></li>
 							<li><a href="{{ url('/beta/kits') }}">Starter Kits</a></li>
 							<li><a href="{{ url('/beta/logout') }}">Logout</a></li>
+							@elseif(!Auth::guest() && \App\Custom\AdminHelper::isLoggedIn() == true)
+							<li><a href="{{ url('/admin/dashboard') }}">Dashboard</a></li>
+							<li><a href="{{ url('/admin/kits') }}">Starter Kits</a></li>
+							<li><a href="{{ url('/admin/logout') }}">Logout</a></li>
 							@endif
 						</ul>
 					</div>
